@@ -18,12 +18,11 @@ router.get('/', (req, res, next) => {
 
 router.post('/new', (req, res, next) => {
 
-  const { name, neighborhood, photograph, address, lat, lng, image, cuisine_type, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = req.body
+  const { name, neighborhood, address, lat, lng, image, cuisine_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday } = req.body
 
   const newRestaurant = new Restaurant({
     name: name,
     neighborhood: neighborhood,
-    photograph: photograph,
     address: address,
     latlng: {
       lat: lat,
@@ -32,13 +31,13 @@ router.post('/new', (req, res, next) => {
     image: image,
     cuisine_type: cuisine_type,
     operating_hours: {
-      Monday: Monday,
-      Tuesday: Tuesday,
-      Wednesday: Wednesday,
-      Thursday: Thursday,
-      Friday: Friday,
-      Saturday: Saturday,
-      Sunday: Sunday,
+      monday: monday,
+      tuesday: tuesday,
+      wednesday: wednesday,
+      thursday: thursday,
+      friday: friday,
+      saturday: saturday,
+      sunday: sunday,
     }
   })
 

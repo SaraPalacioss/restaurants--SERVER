@@ -1,41 +1,35 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt  = require('passport-jwt').ExtractJwt;
-const jwt = require('jsonwebtoken');
-const mongoose    = require('mongoose');
-const User        = require('../models/User');
+const User = require('../models/User');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET;
+passport.serializeUser((user, next) => {
+    next(null, user.id);
+});
+  
+passport.deserializeUser((id, next) => {
+    User.findById(id)
+      .then(user => next(null, user))
+      .catch(next)
+});
 
+passport.use(new LocalStrategy((username, password, next) => {
+    User.findOne({ username }, (err, foundUser) => {
+        if (err) {
+            next(err);
+            return;
+        }
 
-const usePasswordHashToMakeToken = ({
-  password: passwordHash,
-  _id: userId,
-  createdAt
-}) => {
-  const secret = passwordHash + '-' + createdAt
-  const token = jwt.sign({ userId }, secret, {
-    expiresIn: 3600 
-  })
-  return token
-}
+        if (!foundUser) {
+            next(null, false, { message: 'Usuario no registrado.' });
+            return;
+        }
 
+        if (!bcrypt.compareSync(password, foundUser.password)) {
+            next(null, false, { message: 'Contraseña incorrecta.' });
+            return;
+        }
 
-
-module.exports = passport => {
-  passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      User.findById(jwt_payload.id)
-        .then(user => {
-          if (user) {
-            return done(null, user);
-          }
-          return done(null, false);
-        })
-        .catch(err => console.log(err));
-    })
-  );
-};
-
-module.exports = usePasswordHashToMakeToken;
+        next(null, foundUser);
+    });
+}));
