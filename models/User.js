@@ -17,8 +17,7 @@ const userSchema = new Schema({
       return ret;
     }
   }
-})
-
+});
 
 const User = mongoose.model('User', userSchema);
 

@@ -1,24 +1,23 @@
-const express                     = require('express');
-const router                      = express.Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('passport');
-
-const bcrypt                      = require('bcryptjs');
-const jwt                         = require('jsonwebtoken');
-const validateRegisterInput       = require('../../validation/register');
-const validateLoginInput          = require('../../validation/login');
-const usePasswordHashToMakeToken  = require('../../config/auth');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
+const usePasswordHashToMakeToken = require('../../config/auth');
 const User = require('../../models/User');
+
 
 
 router.post('/register', (req, res) => {
 
   const { errors, isValid } = validateRegisterInput(req.body);
-
   if (!isValid) {
     return res.status(400).json(errors);
   };
 
-  const {username, password} = req.body;
+  const { username, password } = req.body;
 
   User.findOne({ username: username }).then(user => {
 
@@ -49,6 +48,7 @@ router.post('/register', (req, res) => {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {
+
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -71,6 +71,7 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+
 router.get("/loggedin", (req, res, next) => {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
@@ -79,11 +80,11 @@ router.get("/loggedin", (req, res, next) => {
   res.json({});
 });
 
+
 router.post("/logout", (req, res, next) => {
   req.logout();
   res.status(200).json({ message: "Log out success!" });
 });
-
 
 
 module.exports = router;

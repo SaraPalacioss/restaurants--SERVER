@@ -4,6 +4,7 @@ const router = express.Router();
 const Restaurant = require('../../models/Restaurants');
 
 
+
 router.get('/', (req, res, next) => {
 
   Restaurant.find()
@@ -39,7 +40,7 @@ router.post('/new', (req, res, next) => {
       saturday: saturday,
       sunday: sunday,
     }
-  })
+  });
 
   newRestaurant.save()
     .then(restaurant => {
@@ -48,7 +49,8 @@ router.post('/new', (req, res, next) => {
     .catch(error => {
       res.status(500).json({ message: 'Error saving new Restaurant information' })
     })
-})
+});
+
 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
@@ -57,7 +59,7 @@ router.get('/:id', (req, res, next) => {
       res.status(200).json(restaurant)
     })
     .catch(error => res.status(500).json({ message: 'Restaurant data not found' }))
-})
+});
 
 
 router.post('/:id', (req, res, next) => {
@@ -69,7 +71,7 @@ router.post('/:id', (req, res, next) => {
     .catch(error => {
       res.status(500).json({ message: 'Something went wrong' })
     })
-})
+});
 
 
 router.delete('/:id', (req, res, next) => {
@@ -78,8 +80,7 @@ router.delete('/:id', (req, res, next) => {
     .then(() => res.status(200).json({ message: `Restaurant subtitle ${id} deleted` }))
     .catch(error => res.status(500).json({ message: 'Something went wrong' }))
 
-})
-
+});
 
 
 module.exports = router;
