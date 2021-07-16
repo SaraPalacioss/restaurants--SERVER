@@ -46,45 +46,71 @@ router.post('/register', (req, res) => {
 });
 
 
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, theUser, failureDetails) => {
-
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-      res.send({ message: "You have to introduce username & password" });
-      return;
-    }
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
-      res.send({ message: "Error authenticating user" });
+      res.status(500).json({ message: 'Incorrect username/password' });
       return;
     }
+
     if (!theUser) {
-      res.send({ message: "Incorrect username/password" });
+      // "failureDetails" contains the error messages
+      // from our logic in "LocalStrategy" { message: '...' }.
+      res.status(401).json({ message: 'You have to inser username and password' });
       return;
     }
-    req.login(theUser, (err) =>
-      err
-        ? res.send({ message: "Incorrect username/password" })
-        : res.status(200).json(theUser)
-    );
+
+    // save user in session
+    req.login(theUser, (err) => {
+      if (err) {
+        res.status(500).json({ message: 'Session save went bad.' });
+        return;
+      }
+      // We are now logged in (that's why we can also send req.user)
+      res.status(200).json(theUser);
+    });
   })(req, res, next);
 });
 
 
-router.get("/loggedin", (req, res, next) => {
+router.post('/logout', (req, res, next) => {
+  req.logout();
+  res.status(200).json({ message: 'Log out success!' });
+});
+
+
+router.get('/loggedin', (req, res, next) => {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
     return;
   }
-  res.json({});
+  res.status(403).json({ message: 'Unauthorized' });
 });
 
 
-router.post("/logout", (req, res, next) => {
-  req.logout();
-  res.status(200).json({ message: "Log out success!" });
+router.post("/favourites", (req, res) => {
+  User.findOne({ favourites: req.body.restaurantID, _id: req.body.userID })
+    .then((result) => {
+     
+      if (result === null) {
+        User.findByIdAndUpdate(req.body.userID, {
+          $push: { favourites: req.body.restaurantID },
+        })
+          .then((res) => {
+          
+            res.status(200).json({ message: "Added to your favourites" });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+    
+
+        res.status({ message: "You already have this restaurant on your favourites" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
-
-
 module.exports = router;

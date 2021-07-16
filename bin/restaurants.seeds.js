@@ -20,13 +20,13 @@ const restaurants = [{
   image:"https://video-images.vice.com/articles/590647db9ac0f921f03ed8d9/lede/1493583856927-mcf_halloween_017.jpeg?crop=1xw:0.8439609902475619xh;center,center&resize=1200:*",
   cuisine_type: "Asian",
   operating_hours: {
-    Monday: "5:30 pm - 11:00 pm",
-    Tuesday: "5:30 pm - 12:00 am",
-    Wednesday: "5:30 pm - 12:00 am",
-    Thursday: "5:30 pm - 12:00 am",
-    Friday: "5:30 pm - 12:00 am",
-    Saturday: "12:00 pm - 4:00 pm, 5:30 pm - 12:00 am",
-    Sunday: "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
+    monday: "5:30 pm - 11:00 pm",
+    tuesday: "5:30 pm - 12:00 am",
+    wednesday: "5:30 pm - 12:00 am",
+    thursday: "5:30 pm - 12:00 am",
+    friday: "5:30 pm - 12:00 am",
+    saturday: "12:00 pm - 4:00 pm, 5:30 pm - 12:00 am",
+    sunday: "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -61,13 +61,13 @@ const restaurants = [{
   image: "https://media-cdn.tripadvisor.com/media/photo-s/17/07/cd/40/the-colony-and-vodka.jpg",
   cuisine_type: "Pizza",
   operating_hours: {
-    Monday: "5:30 pm - 11:00 pm",
-    Tuesday: "5:30 pm - 11:00 pm",
-    Wednesday: "5:30 pm - 11:00 pm",
-    Thursday: "5:30 pm - 11:00 pm",
-    Friday: "5:30 pm - 11:00 pm",
-    Saturday: "5:00 pm - 11:30 pm",
-    Sunday: "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
+    monday: "5:30 pm - 11:00 pm",
+    t: "5:30 pm - 11:00 pm",
+    w: "5:30 pm - 11:00 pm",
+    t: "5:30 pm - 11:00 pm",
+    f: "5:30 pm - 11:00 pm",
+    s: "5:00 pm - 11:30 pm",
+    s: "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
   },
   reviews: [{
       name: "Steph",
@@ -102,13 +102,13 @@ const restaurants = [{
   image:"https://media-cdn.tripadvisor.com/media/photo-s/06/da/d6/de/kang-hodong-baekjeong.jpg",
   cuisine_type: "Asian",
   operating_hours: {
-    Monday: "11:30 am - 2:00 am",
-    Tuesday: "11:30 am - 2:00 am",
-    Wednesday: "11:30 am - 2:00 am",
-    Thursday: "11:30 am - 2:00 am",
-    Friday: "11:30 am - 6:00 am",
-    Saturday: "11:30 am - 6:00 am",
-    Sunday: "11:30 am - 2:00 am"
+    monday: "11:30 am - 2:00 am",
+    t: "11:30 am - 2:00 am",
+    w: "11:30 am - 2:00 am",
+    t: "11:30 am - 2:00 am",
+    f: "11:30 am - 6:00 am",
+    s: "11:30 am - 6:00 am",
+    s: "11:30 am - 2:00 am"
   },
   reviews: [{
       name: "Steve",
@@ -143,13 +143,13 @@ const restaurants = [{
   image:"https://www.livingfla.com/wp-content/uploads/2019/04/katz-1-500.jpg",
   cuisine_type: "American",
   operating_hours: {
-    Monday: "8:00 am - 10:30 pm",
-    Tuesday: "8:00 am - 10:30 pm",
-    Wednesday: "8:00 am - 10:30 pm",
-    Thursday: "8:00 am - 2:30 am",
-    Friday: "8:00 am - Sat",
-    Saturday: "Open 24 hours",
-    Sunday: "Sat - 10:30 pm"
+    monday: "8:00 am - 10:30 pm",
+    t: "8:00 am - 10:30 pm",
+    w: "8:00 am - 10:30 pm",
+    t: "8:00 am - 2:30 am",
+    f: "8:00 am - Sat",
+    s: "Open 24 hours",
+    s: "Sat - 10:30 pm"
   },
   reviews: [{
       name: "Steve",
@@ -184,13 +184,13 @@ const restaurants = [{
   image:"https://c8.alamy.com/compes/dp9a5f/robertas-pizza-restaurant-en-east-williamsburg-de-brooklyn-dp9a5f.jpg",
   cuisine_type: "Pizza",
   operating_hours: {
-    Monday: "11:00 am - 12:00 am",
-    Tuesday: "11:00 am - 12:00 am",
-    Wednesday: "11:00 am - 12:00 am",
-    Thursday: "11:00 am - 12:00 am",
-    Friday: "11:00 am - 12:00 am",
-    Saturday: "10:00 am - 12:00 am",
-    Sunday: "10:00 am - 12:00 am"
+    monday: "11:00 am - 12:00 am",
+    t: "11:00 am - 12:00 am",
+    w: "11:00 am - 12:00 am",
+    t: "11:00 am - 12:00 am",
+    f: "11:00 am - 12:00 am",
+    s: "10:00 am - 12:00 am",
+    s: "10:00 am - 12:00 am"
   },
   reviews: [{
       name: "Steve",
@@ -225,13 +225,13 @@ const restaurants = [{
   image:"https://es.nycgo.com/images/venues/6326/hometownbbq_redhook_brooklyn_nyc_kengoodman_hometownbbq-153-3__x_large.jpg",
   cuisine_type: "American",
   operating_hours: {
-    Monday: "Closed",
-    Tuesday: "12:00 pm - 10:00 pm",
-    Wednesday: "12:00 pm - 10:00 pm",
-    Thursday: "12:00 pm - 10:00 pm",
-    Friday: "12:00 pm - 11:00 pm",
-    Saturday: "12:00 pm - 11:00 pm",
-    Sunday: "12:00 pm - 9:00 pm"
+    monday: "Closed",
+    t: "12:00 pm - 10:00 pm",
+    w: "12:00 pm - 10:00 pm",
+    t: "12:00 pm - 10:00 pm",
+    f: "12:00 pm - 11:00 pm",
+    s: "12:00 pm - 11:00 pm",
+    s: "12:00 pm - 9:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -266,13 +266,13 @@ const restaurants = [{
   image:"http://www.wazwu.com/blog/wp-content/uploads/2015/10/img_6912.jpg",
   cuisine_type: "American",
   operating_hours: {
-    Monday: "11:30 am - 10:00 pm",
-    Tuesday: "Closed",
-    Wednesday: "11:30 am - 10:00 pm",
-    Thursday: "11:30 am - 10:00 pm",
-    Friday: "11:30 am - 10:00 pm",
-    Saturday: "11:30 am - 10:00 pm",
-    Sunday: "11:30 am - 10:00 pm"
+    monday: "11:30 am - 10:00 pm",
+    t: "Closed",
+    w: "11:30 am - 10:00 pm",
+    t: "11:30 am - 10:00 pm",
+    f: "11:30 am - 10:00 pm",
+    s: "11:30 am - 10:00 pm",
+    s: "11:30 am - 10:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -290,7 +290,7 @@ const restaurants = [{
       name: "Shivi",
       date: "October 26, 2016",
       rating: 4,
-      comments: "Great flavors and very satisfying. Craving a sandwich, I stopped by on a Friday night with a vegetarian friend. Super small location with just a few seats inside. Ambiance is a bit industrial, good is definitely much more sophisticated than the look of the place! Ordered the superiority burger anda side of potato salad. The potato salad was very light and tasted clean ( less mayo, lots of dill and some cucumber) -- refreshing for a humid summer night! Sandwich was surprisingly delicious - it is very small ( funny allusion to a White Castle burger) but it packs a punch! Not only are there layers of flavors ( amazing sauces) but the party itself had a great texture Ahmed flavor-- well done and so wonderful! Will definitely stop by again for an overall amazing burger/sandwich. Staff was super nice and accommodating but not out of the way friendly."
+      comments: "Great flavors and very satisfying. Craving a sandwich, I stopped by on a f night with a vegetarian friend. Super small location with just a few seats inside. Ambiance is a bit industrial, good is definitely much more sophisticated than the look of the place! Ordered the superiority burger anda side of potato salad. The potato salad was very light and tasted clean ( less mayo, lots of dill and some cucumber) -- refreshing for a humid summer night! Sandwich was surprisingly delicious - it is very small ( funny allusion to a White Castle burger) but it packs a punch! Not only are there layers of flavors ( amazing sauces) but the party itself had a great texture Ahmed flavor-- well done and so wonderful! Will definitely stop by again for an overall amazing burger/sandwich. Staff was super nice and accommodating but not out of the way friendly."
     }
   ]
 }, {
@@ -307,13 +307,13 @@ const restaurants = [{
   image:"https://es.nycgo.com/images/venues/4829/thedutch29_sa_bar-room_sm__x_large.jpg",
   cuisine_type: "American",
   operating_hours: {
-    Monday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    Tuesday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    Wednesday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    Thursday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    Friday: "11:30 am - 3:00 pm, 5:30 pm - 11:30 pm",
-    Saturday: "10:00 am - 3:00 pm, 5:30 pm - 11:30 pm",
-    Sunday: "10:00 am - 3:00 pm, 5:30 pm - 11:00 pm"
+    monday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    t: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    w: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    t: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    f: "11:30 am - 3:00 pm, 5:30 pm - 11:30 pm",
+    s: "10:00 am - 3:00 pm, 5:30 pm - 11:30 pm",
+    s: "10:00 am - 3:00 pm, 5:30 pm - 11:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -325,7 +325,7 @@ const restaurants = [{
       name: "Loren",
       date: "October 26, 2016",
       rating: 4,
-      comments: "I randomly came here on a Saturday night. I was pleasantly surprised with the food and the service. We had the calamari and the ceviche with avocado, and then the catfish. Oh! Then we had the banana soufflé for dessert with ice cream. It was all delicious and well put together. Would love to eat here again."
+      comments: "I randomly came here on a s night. I was pleasantly surprised with the food and the service. We had the calamari and the ceviche with avocado, and then the catfish. Oh! Then we had the banana soufflé for dessert with ice cream. It was all delicious and well put together. Would love to eat here again."
     },
     {
       name: "Lori",
@@ -348,13 +348,13 @@ const restaurants = [{
   image:"https://resizer.otstatic.com/v2/photos/huge/25670650.jpg",
   cuisine_type: "Asian",
   operating_hours: {
-    Monday: "5:00 pm - 10:00 pm",
-    Tuesday: "5:00 pm - 10:00 pm",
-    Wednesday: "5:00 pm - 10:00 pm",
-    Thursday: "5:00 pm - 10:00 pm",
-    Friday: "5:00 pm - 11:00 pm",
-    Saturday: "5:00 pm - 11:00 pm",
-    Sunday: "5:00 pm - 10:00 pm"
+    monday: "5:00 pm - 10:00 pm",
+    t: "5:00 pm - 10:00 pm",
+    w: "5:00 pm - 10:00 pm",
+    t: "5:00 pm - 10:00 pm",
+    f: "5:00 pm - 11:00 pm",
+    s: "5:00 pm - 11:00 pm",
+    s: "5:00 pm - 10:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -389,13 +389,13 @@ const restaurants = [{
   image:"https://i.pinimg.com/474x/47/b1/d3/47b1d3175589f19f58a35cfcd78b3e73--city-restaurants-mexican-restaurants.jpg",
   cuisine_type: "Mexican",
   operating_hours: {
-    Monday: "5:00 pm - 12:00 am",
-    Tuesday: "5:00 pm - 12:00 am",
-    Wednesday: "5:00 pm - 12:00 am",
-    Thursday: "5:00 pm - 12:00 am",
-    Friday: "5:00 pm - 12:00 am",
-    Saturday: "11:00 am - 12:00 am",
-    Sunday: "11:00 am - 12:00 am"
+    monday: "5:00 pm - 12:00 am",
+    t: "5:00 pm - 12:00 am",
+    w: "5:00 pm - 12:00 am",
+    t: "5:00 pm - 12:00 am",
+    f: "5:00 pm - 12:00 am",
+    s: "11:00 am - 12:00 am",
+    s: "11:00 am - 12:00 am"
   },
   reviews: [{
       name: "Steve",
