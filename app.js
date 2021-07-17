@@ -10,8 +10,11 @@ const path = require('path');
 const cors = require('cors');
 const cookieSession = require('cookie-session');
 const passport = require('passport')
+const mongoose     = require('mongoose');
+
 const connectDB = require('./config/db');
 const app = express();
+const MongoStore = require('connect-mongo')(session);
 
 connectDB();
 require('./config/auth');
@@ -54,10 +57,7 @@ app.use(
 
 //   next();
 // });
-
-
-app.use(passport.initialize());
-app.use(passport.session());
+// MDW SESSION
 
 
 app.use((req, res, next) => {
@@ -66,24 +66,42 @@ app.use((req, res, next) => {
 });
 
 
-app.set('trust proxy', 1)
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2'],
-  sameSite: 'none',
-  secure: true
-}));
+// app.set('trust proxy', 1)
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2'],
+//   sameSite: 'none',
+//   secure: true
+// }));
 
+
+// app.use(session({
+//   secret: `oursecret`,
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: {
+//     sameSite: 'none',
+//     secure: true
+//   }
+// }));
 
 app.use(session({
-  secret: `oursecret`,
-  resave: true,
+  secret: process.env.SECRET,
+  resave: false,
   saveUninitialized: true,
   cookie: {
-    sameSite: 'none',
-    secure: true
-  }
-}));
+    secure: false,
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 1000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60
+  })
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(express.static(path.join(__dirname, 'public')));

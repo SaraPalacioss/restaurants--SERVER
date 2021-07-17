@@ -88,7 +88,8 @@ router.get('/loggedin', (req, res, next) => {
 router.post('/favourites', (req, res) => {
 
   const {restaurantID, userID} = req.body;
-
+console.log(restaurantID)
+console.log(userID)
   User.findOne({ favourites: restaurantID, _id: userID })
     .then((result) => {
       if (result === null) {
@@ -97,6 +98,7 @@ router.post('/favourites', (req, res) => {
         })
           .then(() => {
             res.send({ message: "Added to your favourites" }).status(200);
+            console.log(userID )
           })
           .catch((err) => {
             console.log(err);

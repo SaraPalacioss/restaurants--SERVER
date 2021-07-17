@@ -65,6 +65,18 @@ router.get('/:id', (req, res, next) => {
 
 });
 
+router.get('/myfavourites', (req, res, next) => {
+
+  const { id } = req.body;
+
+  Restaurant.findById(id)
+    .then(restaurant => {
+      res.status(200).json(restaurant)
+    })
+    .catch(err => res.status(500).json({ message: 'Restaurant data not found' }))
+
+});
+
 
 router.post('/:id', (req, res, next) => {
 
@@ -82,7 +94,7 @@ router.post('/:id', (req, res, next) => {
 
 
 router.delete('/:id', (req, res, next) => {
-  
+
   const { id } = req.params;
   Restaurant.findByIdAndDelete(id)
     .then(() => res.status(200).json({ message: `Restaurant subtitle ${id} deleted` }))
