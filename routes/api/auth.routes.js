@@ -13,9 +13,9 @@ router.post('/register', (req, res) => {
 
   User.findOne({ username: username }).then(user => {
     if (user) {
-      return res.status(400).json({ message: 'Username already exists' });
+      return res.status(400).send({ message: 'Username already exists' });
     } else if (password.length < 6) {
-      return res.status(400).json({ message: 'Password minimun length is 6 characters' });
+      return res.status(400).send({ message: 'Password minimun length is 6 characters' });
     } else {
       const newUser = new User({
         username: username,
@@ -44,20 +44,20 @@ router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
-      res.status(500).json({ message: 'Something went wrong authenticating user' });
+      res.status(500).send({ message: 'Something went wrong authenticating user' });
       return;
     };
     if(!username | !password) {
-      res.status(400).json({ message: 'You have to introduce username & password' });
+      res.send({ message: 'You have to introduce username & password' }).status(400);
       return;
     };
     if (!theUser) {
-      res.status(400).json({ message: 'Incorrect username/password' });
+      res.send({ message: 'Incorrect username/password' }).status(400);
       return;
     };
     req.login(theUser, (err) => {
       if (err) {
-        res.status(500).json({ message: 'Session save went bad' });
+        res.send({ message: 'Session save went bad' }).status(500);
         return;
       };
       res.status(200).json(theUser);
@@ -69,7 +69,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
   req.logout();
-  res.status(200).json({ message: 'Log out success!' });
+  res.send({ message: 'Log out success!' }).status(200);
 });
 
 
@@ -80,12 +80,12 @@ router.get('/loggedin', (req, res, next) => {
     return;
   }; 
 
-  res.status(403).json({ message: 'Unauthorized' });
+  res.send({ message: 'Unauthorized' }).status(403);
 
 });
 
 
-router.post("/favourites", (req, res) => {
+router.post('/favourites', (req, res) => {
 
   const {restaurantID, userID} = req.body;
 
@@ -96,13 +96,13 @@ router.post("/favourites", (req, res) => {
           $push: { favourites: restaurantID },
         })
           .then(() => {
-            res.status(200).json({ message: "Added to your favourites" });
+            res.send({ message: "Added to your favourites" }).status(200);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
-        res.status(400).json({ message: "You already have this restaurant on your favourites" });
+        res.send({ message: "You already have this restaurant on your favourites" }).status(400);
       }
     })
     .catch((err) => {
@@ -110,5 +110,28 @@ router.post("/favourites", (req, res) => {
     });
     
 });
+
+router.post('/deletefavourite', (req, res) =>{
+  const {restaurantID, userID} = req.body;
+  User.findOne({ favourites: restaurantID, _id: userID })
+  .then((result) => {
+    if (result) {
+      User.findByIdAndUpdate(userID, { $pullAll: { favourites: [ restaurantID ] }})
+        .then(() => {
+          res.send({ message: "Remove from your favourites" }).status(200);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } 
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+})
+  
+  
+
 
 module.exports = router;
