@@ -36,7 +36,7 @@ app.use(require('node-sass-middleware')({
 app.use(
   cors({
     credentials: true,
-    origin: [`http://localhost:3001`, `http://localhost:3001`],
+    origin: [`http://localhost:${process.env.PORT2}`],
   })
 );
 

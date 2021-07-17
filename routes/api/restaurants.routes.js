@@ -8,13 +8,13 @@ const Restaurant = require('../../models/Restaurants');
 router.get('/', (req, res, next) => {
 
   Restaurant.find()
-
     .then(restaurant => {
       res.status(200).json(restaurant)
     })
-    .catch(error => {
+    .catch(err => {
       res.status(500).json({ message: 'Something went wrong' })
     })
+
 })
 
 router.post('/new', (req, res, next) => {
@@ -46,39 +46,47 @@ router.post('/new', (req, res, next) => {
     .then(restaurant => {
       res.status(200).json(restaurant)
     })
-    .catch(error => {
+    .catch(err => {
       res.status(500).json({ message: 'Error saving new Restaurant information' })
     })
+
 });
 
 
 router.get('/:id', (req, res, next) => {
+
   const { id } = req.params;
+
   Restaurant.findById(id)
     .then(restaurant => {
       res.status(200).json(restaurant)
     })
-    .catch(error => res.status(500).json({ message: 'Restaurant data not found' }))
+    .catch(err => res.status(500).json({ message: 'Restaurant data not found' }))
+
 });
 
 
 router.post('/:id', (req, res, next) => {
+
   const { id } = req.params;
+
   Restaurant.findByIdAndUpdate(id, req.body)
     .then(() => {
       res.status(200).json({ message: `Restaurant id ${id} updated` })
     })
-    .catch(error => {
+    .catch(err => {
       res.status(500).json({ message: 'Something went wrong' })
     })
+
 });
 
 
 router.delete('/:id', (req, res, next) => {
+  
   const { id } = req.params;
   Restaurant.findByIdAndDelete(id)
     .then(() => res.status(200).json({ message: `Restaurant subtitle ${id} deleted` }))
-    .catch(error => res.status(500).json({ message: 'Something went wrong' }))
+    .catch(err => res.status(500).json({ message: 'Something went wrong' }))
 
 });
 

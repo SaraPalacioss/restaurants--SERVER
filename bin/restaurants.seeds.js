@@ -62,12 +62,12 @@ const restaurants = [{
   cuisine_type: "Pizza",
   operating_hours: {
     monday: "5:30 pm - 11:00 pm",
-    t: "5:30 pm - 11:00 pm",
-    w: "5:30 pm - 11:00 pm",
-    t: "5:30 pm - 11:00 pm",
-    f: "5:30 pm - 11:00 pm",
-    s: "5:00 pm - 11:30 pm",
-    s: "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
+    tuesday: "5:30 pm - 11:00 pm",
+    wednesdat: "5:30 pm - 11:00 pm",
+    thursday: "5:30 pm - 11:00 pm",
+    friday: "5:30 pm - 11:00 pm",
+    saturday: "5:00 pm - 11:30 pm",
+    sunday: "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
   },
   reviews: [{
       name: "Steph",
@@ -103,12 +103,12 @@ const restaurants = [{
   cuisine_type: "Asian",
   operating_hours: {
     monday: "11:30 am - 2:00 am",
-    t: "11:30 am - 2:00 am",
-    w: "11:30 am - 2:00 am",
-    t: "11:30 am - 2:00 am",
-    f: "11:30 am - 6:00 am",
-    s: "11:30 am - 6:00 am",
-    s: "11:30 am - 2:00 am"
+    tuesday: "11:30 am - 2:00 am",
+    wednesday: "11:30 am - 2:00 am",
+    thursday: "11:30 am - 2:00 am",
+    friday: "11:30 am - 6:00 am",
+    saturday: "11:30 am - 6:00 am",
+    sunday: "11:30 am - 2:00 am"
   },
   reviews: [{
       name: "Steve",
@@ -144,12 +144,12 @@ const restaurants = [{
   cuisine_type: "American",
   operating_hours: {
     monday: "8:00 am - 10:30 pm",
-    t: "8:00 am - 10:30 pm",
-    w: "8:00 am - 10:30 pm",
-    t: "8:00 am - 2:30 am",
-    f: "8:00 am - Sat",
-    s: "Open 24 hours",
-    s: "Sat - 10:30 pm"
+    tuesday: "8:00 am - 10:30 pm",
+    wednesday: "8:00 am - 10:30 pm",
+    thursday: "8:00 am - 2:30 am",
+    friday: "8:00 am - Sat",
+    saturday: "Open 24 hours",
+    sunday: "Sat - 10:30 pm"
   },
   reviews: [{
       name: "Steve",
@@ -185,12 +185,12 @@ const restaurants = [{
   cuisine_type: "Pizza",
   operating_hours: {
     monday: "11:00 am - 12:00 am",
-    t: "11:00 am - 12:00 am",
-    w: "11:00 am - 12:00 am",
-    t: "11:00 am - 12:00 am",
-    f: "11:00 am - 12:00 am",
-    s: "10:00 am - 12:00 am",
-    s: "10:00 am - 12:00 am"
+    tuesday: "11:00 am - 12:00 am",
+    wednesday: "11:00 am - 12:00 am",
+    thursday: "11:00 am - 12:00 am",
+    friday: "11:00 am - 12:00 am",
+    saturday: "10:00 am - 12:00 am",
+    sunday: "10:00 am - 12:00 am"
   },
   reviews: [{
       name: "Steve",
@@ -226,12 +226,12 @@ const restaurants = [{
   cuisine_type: "American",
   operating_hours: {
     monday: "Closed",
-    t: "12:00 pm - 10:00 pm",
-    w: "12:00 pm - 10:00 pm",
-    t: "12:00 pm - 10:00 pm",
-    f: "12:00 pm - 11:00 pm",
-    s: "12:00 pm - 11:00 pm",
-    s: "12:00 pm - 9:00 pm"
+    tuesday: "12:00 pm - 10:00 pm",
+    wednesday: "12:00 pm - 10:00 pm",
+    thursday: "12:00 pm - 10:00 pm",
+    friday: "12:00 pm - 11:00 pm",
+    saturday: "12:00 pm - 11:00 pm",
+    sunday: "12:00 pm - 9:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -267,12 +267,12 @@ const restaurants = [{
   cuisine_type: "American",
   operating_hours: {
     monday: "11:30 am - 10:00 pm",
-    t: "Closed",
-    w: "11:30 am - 10:00 pm",
-    t: "11:30 am - 10:00 pm",
-    f: "11:30 am - 10:00 pm",
-    s: "11:30 am - 10:00 pm",
-    s: "11:30 am - 10:00 pm"
+    tueday: "Closed",
+    wednesday: "11:30 am - 10:00 pm",
+    thursday: "11:30 am - 10:00 pm",
+    friday: "11:30 am - 10:00 pm",
+    saturday: "11:30 am - 10:00 pm",
+    sunday: "11:30 am - 10:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -308,12 +308,12 @@ const restaurants = [{
   cuisine_type: "American",
   operating_hours: {
     monday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    t: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    w: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    t: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
-    f: "11:30 am - 3:00 pm, 5:30 pm - 11:30 pm",
-    s: "10:00 am - 3:00 pm, 5:30 pm - 11:30 pm",
-    s: "10:00 am - 3:00 pm, 5:30 pm - 11:00 pm"
+    tuesday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    wednesday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    thursday: "11:30 am - 3:00 pm, 5:30 pm - 11:00 pm",
+    friday: "11:30 am - 3:00 pm, 5:30 pm - 11:30 pm",
+    saturday: "10:00 am - 3:00 pm, 5:30 pm - 11:30 pm",
+    sunday: "10:00 am - 3:00 pm, 5:30 pm - 11:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -349,12 +349,12 @@ const restaurants = [{
   cuisine_type: "Asian",
   operating_hours: {
     monday: "5:00 pm - 10:00 pm",
-    t: "5:00 pm - 10:00 pm",
-    w: "5:00 pm - 10:00 pm",
-    t: "5:00 pm - 10:00 pm",
-    f: "5:00 pm - 11:00 pm",
-    s: "5:00 pm - 11:00 pm",
-    s: "5:00 pm - 10:00 pm"
+    tuesday: "5:00 pm - 10:00 pm",
+    wednesday: "5:00 pm - 10:00 pm",
+    thursday: "5:00 pm - 10:00 pm",
+    friday: "5:00 pm - 11:00 pm",
+    saturday: "5:00 pm - 11:00 pm",
+    sunday: "5:00 pm - 10:00 pm"
   },
   reviews: [{
       name: "Steve",
@@ -390,12 +390,12 @@ const restaurants = [{
   cuisine_type: "Mexican",
   operating_hours: {
     monday: "5:00 pm - 12:00 am",
-    t: "5:00 pm - 12:00 am",
-    w: "5:00 pm - 12:00 am",
-    t: "5:00 pm - 12:00 am",
-    f: "5:00 pm - 12:00 am",
-    s: "11:00 am - 12:00 am",
-    s: "11:00 am - 12:00 am"
+    tuesday: "5:00 pm - 12:00 am",
+    wednesday: "5:00 pm - 12:00 am",
+    thursday: "5:00 pm - 12:00 am",
+    friday: "5:00 pm - 12:00 am",
+    saturday: "11:00 am - 12:00 am",
+    sunday: "11:00 am - 12:00 am"
   },
   reviews: [{
       name: "Steve",
