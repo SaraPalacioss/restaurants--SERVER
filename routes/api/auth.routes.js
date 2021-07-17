@@ -13,9 +13,9 @@ router.post('/register', (req, res) => {
 
   User.findOne({ username: username }).then(user => {
     if (user) {
-      return res.status(400).send({ message: 'Username already exists' });
+      return res.send({ message: 'Username already exists' }).status(400);
     } else if (password.length < 6) {
-      return res.status(400).send({ message: 'Password minimun length is 6 characters' });
+      return res.send({ message: 'Password minimun length is 6 characters' }).status(400);
     } else {
       const newUser = new User({
         username: username,
@@ -44,7 +44,7 @@ router.post('/login', (req, res, next) => {
 
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
-      res.status(500).send({ message: 'Something went wrong authenticating user' });
+      res.send({ message: 'Something went wrong authenticating user' }).status(500);
       return;
     };
     if(!username | !password) {
