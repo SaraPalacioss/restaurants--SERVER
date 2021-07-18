@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-
 const User = require('../../models/User');
-
 
 
 router.post('/register', (req, res) => {
@@ -40,14 +38,14 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res, next) => {
 
-  const {username, password} = req.body;
+  const { username, password } = req.body;
 
   passport.authenticate('local', (err, theUser, failureDetails) => {
     if (err) {
       res.send({ message: 'Something went wrong authenticating user' }).status(500);
       return;
     };
-    if(!username | !password) {
+    if (!username | !password) {
       res.send({ message: 'You have to introduce username & password' }).status(400);
       return;
     };
@@ -78,7 +76,7 @@ router.get('/loggedin', (req, res, next) => {
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
     return;
-  }; 
+  };
 
   res.send({ message: 'Unauthorized' }).status(403);
 
@@ -87,19 +85,16 @@ router.get('/loggedin', (req, res, next) => {
 
 router.post('/favourites', (req, res) => {
 
-  const {restaurantID, userID} = req.body;
-console.log(restaurantID)
-console.log(userID)
+  const { restaurantID, userID } = req.body;
+  console.log(restaurantID)
+  console.log(userID)
   User.findOne({ favourites: restaurantID, _id: userID })
     .then((result) => {
       if (result === null) {
         User.findByIdAndUpdate(userID, {
           $push: { favourites: restaurantID },
         })
-          .then(() => {
-            res.send({ message: "Added to your favourites" }).status(200);
-            console.log(userID )
-          })
+          .then(() => { res.send({ message: "Added to your favourites" }).status(200); })
           .catch((err) => {
             console.log(err);
           });
@@ -110,33 +105,25 @@ console.log(userID)
     .catch((err) => {
       console.log(err);
     });
-    
+
 });
 
 
 
-
-router.post('/deletefavourite', (req, res) =>{
-  const {restaurantID, userID} = req.body;
+router.post('/deletefavourite', (req, res) => {
+  const { restaurantID, userID } = req.body;
   User.findOne({ favourites: restaurantID, _id: userID })
-  .then((result) => {
-    if (result) {
-      User.findByIdAndUpdate(userID, { $pullAll: { favourites: [ restaurantID ] }})
-        .then(() => {
-          res.send({ message: "Remove from your favourites" }).status(200);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } 
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+    .then((result) => {
+      if (result) {
+        User.findByIdAndUpdate(userID, { $pullAll: { favourites: [restaurantID] } })
+          .then(() => res.send({ message: "Remove from your favourites" }).status(200))
+          .catch((err) => console.log(err))
+      }
+    })
+    .catch((err) => console.log(err))
 
-})
-  
-  
+});
+
 
 
 module.exports = router;
