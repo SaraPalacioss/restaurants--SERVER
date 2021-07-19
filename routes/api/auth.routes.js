@@ -77,7 +77,7 @@ router.post("/login", (req, res) => {
   User.findOne({ username }).then(user => {
  
     if (!username | !password) {
-      res.send({ message: 'You have to introduce username & password' }).status(400);
+      res.send({ message: 'Introduce username & password' }).status(400);
       return;
     };
     if (!username) {
