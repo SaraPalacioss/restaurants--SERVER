@@ -10,7 +10,7 @@ const RestaurantSchema = new Schema({
     lat: { type: Number },
     lng: { type: Number },
   },
-  image: { type: String , default: 'https://images.assetsdelivery.com/compings_v2/yehorlisnyi/yehorlisnyi2104/yehorlisnyi210400016.jpg'},
+  image: {type: String, default: 'https://i.pinimg.com/736x/a4/72/94/a47294cea4dcf32485d6a4de24575c95.jpg'},
   cuisine_type: { type: String },
   operating_hours: {
     monday: { type: String },

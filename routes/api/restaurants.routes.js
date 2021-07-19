@@ -30,7 +30,6 @@ router.post('/new', (req, res, next) => {
       lat: lat,
       lng: lng,
     },
-    image: image,
     cuisine_type: cuisine_type,
     operating_hours: {
       monday: monday,
@@ -56,7 +55,7 @@ router.get('/:id', (req, res, next) => {
   const { id } = req.params;
 
   Restaurant.findById(id)
-    .then(restaurant => res.send({ message: `Restaurant info updated` }).status(200))
+  .then(restaurant => res.status(200).json(restaurant))
     .catch(err => res.status(500).json({ message: 'Restaurant data not found' }))
 
 });

@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
+const jwt = require("jsonwebtoken");
 
 
 router.post('/register', (req, res) => {
@@ -36,32 +37,93 @@ router.post('/register', (req, res) => {
 });
 
 
-router.post('/login', (req, res, next) => {
+// router.post('/login', (req, res, next) => {
+
+//   const { username, password } = req.body;
+
+//   passport.authenticate('local', (err, theUser, failureDetails) => {
+//     if (err) {
+//       res.send({ message: 'Something went wrong authenticating user' }).status(500);
+//       return;
+//     };
+//     if (!username | !password) {
+//       res.send({ message: 'You have to introduce username & password' }).status(400);
+//       return;
+//     };
+//     if (!theUser) {
+//       res.send({ message: 'Incorrect username/password' }).status(400);
+//       return;
+//     };
+//     req.login(theUser, (err) => {
+//       if (err) {
+//         res.send({ message: 'Session save went bad' }).status(500);
+//         return;
+//       };
+//       res.status(200).json(theUser);
+//     }
+    
+//     );
+//   })(req, res, next);
+
+// });
+
+
+router.post("/login", (req, res) => {
+
 
   const { username, password } = req.body;
 
-  passport.authenticate('local', (err, theUser, failureDetails) => {
-    if (err) {
-      res.send({ message: 'Something went wrong authenticating user' }).status(500);
-      return;
-    };
+  // Find user by email
+  User.findOne({ username }).then(user => {
+ 
     if (!username | !password) {
       res.send({ message: 'You have to introduce username & password' }).status(400);
       return;
     };
-    if (!theUser) {
+    if (!username) {
       res.send({ message: 'Incorrect username/password' }).status(400);
       return;
     };
-    req.login(theUser, (err) => {
-      if (err) {
-        res.send({ message: 'Session save went bad' }).status(500);
-        return;
-      };
-      res.status(200).json(theUser);
-    });
-  })(req, res, next);
+    // Check password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User matched
+        // Create JWT Payload
+        const payload = {
+          id: user.id,
+          username: user.username,
+          favourites: user.favourites
+        };
 
+        // Sign token
+        jwt.sign(
+          payload,
+          `${process.env.SECRET}`,
+          {
+            expiresIn: 31556926 // 1 year in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token,
+              user
+            })
+            
+           
+            ;
+            //     
+
+          }
+        )
+   ;
+        
+      } else {
+        return res.send({ message: 'Incorrect username/password' }).status(400);
+
+      }
+
+    });
+  });
 });
 
 
@@ -72,15 +134,25 @@ router.post('/logout', (req, res, next) => {
 
 
 router.get('/loggedin', (req, res, next) => {
-
-  if (req.isAuthenticated()) {
-    res.status(200).json(req.user);
-    return;
-  };
-
-  res.send({ message: 'Unauthorized' }).status(403);
-
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZjFhMjA0MDYxOTY0NDYyNzRlMDNkMyIsInVzZXJuYW1lIjoiMTJAMTIuY29tIiwiZmF2b3VyaXRlcyI6WyI2MGYyYmZlNTkwOTFkYjkxZmVhZGIxZTUiLCI2MGY0MTZhMDQ0OWZhNDFhZGJjNDk5NGUiLG51bGwsIjYwZjM5MmViZjg0YTdhMDlmZjRkMjA1OCIsIjYwZjJiZmU1OTA5MWRiOTFmZWFkYjFjZCIsIjYwZjJiZmU1OTA5MWRiOTFmZWFkYjFkMSJdLCJpYXQiOjE2MjY2MzcyODgsImV4cCI6MTY1ODE5NDIxNH0.o4CFJReVE0irE7yVuVuTG2onjouYxPV_R6KAdYZLOUk';
+  if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+  
+  jwt.verify(token, process.env.SECRET, function(err, decoded) {
+    if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+    
+    User.findById(decoded.id, 
+    { password: 0 }, // projection
+    function (err, user) {
+      if (err) return res.status(500).send("There was a problem finding the user.");
+      if (!user) return res.status(404).send("No user found.");
+        
+      res.json(user)
+      
+      next(user); // add this line
+    });
+  });
 });
+
 
 
 router.post('/favourites', (req, res) => {
@@ -108,7 +180,20 @@ router.post('/favourites', (req, res) => {
 
 });
 
+router.post('/get-user', (req, res) => {
 
+  const { id } = req.body;
+console.log(id)
+
+  
+  User.findById(id)
+  
+    .then(user => res.status(200).json(user)
+    )
+    .catch(err => res.status(500).json({ message: 'User data not found' }))
+
+
+});
 
 router.post('/deletefavourite', (req, res) => {
   const { restaurantID, userID } = req.body;
