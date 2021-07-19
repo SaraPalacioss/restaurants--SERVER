@@ -36,13 +36,28 @@ app.use(require('node-sass-middleware')({
 }));
 
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: process.env.PORT2,
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: [`http://localhost:3001`, `http://localhost:3001`],
+  })
+);
 
+
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   if (req.method == "OPTIONS") {
+//     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+//     return res.status(200).json({});
+//   }
+
+//   next();
+// });
+// MDW SESSION
 
 
 app.use((req, res, next) => {
@@ -50,6 +65,25 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// app.set('trust proxy', 1)
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2'],
+//   sameSite: 'none',
+//   secure: true
+// }));
+
+
+// app.use(session({
+//   secret: `oursecret`,
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: {
+//     sameSite: 'none',
+//     secure: true
+//   }
+// }));
 
 app.use(session({
   secret: process.env.SECRET,
