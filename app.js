@@ -39,7 +39,7 @@ app.use(require('node-sass-middleware')({
 app.use(
   cors({
     credentials: true,
-    origin: [`${process.env.PORT}`, `${process.env.PORT2}`],
+    origin: process.env.PORT2,
   })
 );
 
